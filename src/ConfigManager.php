@@ -1,8 +1,10 @@
 <?php
 namespace DmitriiKoziuk\yii2ConfigManager;
 
+use Yii;
 use yii\web\Application as WebApp;
 use yii\base\Application as BaseApp;
+use DmitriiKoziuk\yii2Base\helpers\FileHelper;
 use DmitriiKoziuk\yii2ModuleManager\interfaces\ModuleInterface;
 use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
 use DmitriiKoziuk\yii2ConfigManager\data\Config;
@@ -16,7 +18,7 @@ final class ConfigManager extends \yii\base\Module implements ModuleInterface
 
     const GENERAL_CONFIG_NAME = 'general';
 
-    const CONFIG_SAVE_LOCATION = __DIR__ . '/config';
+    const CONFIG_SAVE_LOCATION = '@common/storage/dk-config-manager/config';
 
     /**
      * @var \yii\di\Container
@@ -80,11 +82,23 @@ final class ConfigManager extends \yii\base\Module implements ModuleInterface
         ];
     }
 
+    /**
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\di\NotInstantiableException
+     */
     private function _registerClassesToDIContainer(): void
     {
-        $this->diContainer->setSingleton(ConfigService::class, function () {
-            return new ConfigService(self::CONFIG_SAVE_LOCATION);
-        });
+        /** @var FileHelper $fileHelper */
+        $fileHelper = $this->diContainer->get(FileHelper::class);
+        $this->diContainer->setSingleton(
+            ConfigService::class,
+            function () use ($fileHelper) {
+                return new ConfigService(
+                    Yii::getAlias(self::CONFIG_SAVE_LOCATION),
+                    $fileHelper
+                );
+            }
+        );
     }
 
     /**

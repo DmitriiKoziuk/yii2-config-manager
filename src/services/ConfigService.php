@@ -1,6 +1,7 @@
 <?php
 namespace DmitriiKoziuk\yii2ConfigManager\services;
 
+use DmitriiKoziuk\yii2Base\helpers\FileHelper;
 use DmitriiKoziuk\yii2ConfigManager\interfaces\ConfigInterface;
 
 class ConfigService
@@ -15,9 +16,18 @@ class ConfigService
      */
     private $_saveLocation;
 
-    public function __construct(string $saveLocation)
-    {
+    /**
+     * @var FileHelper
+     */
+    private $_fileHelper;
+
+    public function __construct(
+        string $saveLocation,
+        FileHelper $fileHelper
+    ) {
         $this->_saveLocation = $saveLocation;
+        $this->_fileHelper = $fileHelper;
+        $this->_fileHelper->createDirectoryIfNotExist($this->_saveLocation);
     }
 
     public function registerConfig(ConfigInterface $config)
