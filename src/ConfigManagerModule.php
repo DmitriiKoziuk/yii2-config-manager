@@ -10,7 +10,7 @@ use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
 use DmitriiKoziuk\yii2ConfigManager\data\Config;
 use DmitriiKoziuk\yii2ConfigManager\data\ValueString;
 
-final class ConfigManager extends \yii\base\Module implements ModuleInterface
+final class ConfigManagerModule extends \yii\base\Module implements ModuleInterface
 {
     const ID = 'dk-config-manager';
 
