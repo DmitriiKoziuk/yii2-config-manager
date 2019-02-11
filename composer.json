@@ -18,7 +18,8 @@
     "require": {
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.0",
-        "dmitriikoziuk/yii2-web-backend-lock": "dev-master"
+        "dmitriikoziuk/yii2-base": "^0.1",
+        "dmitriikoziuk/yii2-web-backend-lock": "^0.1"
     },
     "autoload": {
         "psr-4": {
