@@ -10,7 +10,7 @@ use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
 use DmitriiKoziuk\yii2ConfigManager\data\Config;
 use DmitriiKoziuk\yii2ConfigManager\data\ValueString;
 
-final class ConfigManager extends \yii\base\Module implements ModuleInterface
+final class ConfigManagerModule extends \yii\base\Module implements ModuleInterface
 {
     const ID = 'dk-config-manager';
 
@@ -18,7 +18,10 @@ final class ConfigManager extends \yii\base\Module implements ModuleInterface
 
     const GENERAL_CONFIG_NAME = 'general';
 
-    const CONFIG_SAVE_LOCATION = '@common/storage/dk-config-manager/config';
+    const CONFIG_SAVE_LOCATION = '@common' . DIRECTORY_SEPARATOR .
+        'storage' . DIRECTORY_SEPARATOR .
+        'dk-config-manager' . DIRECTORY_SEPARATOR .
+        'config';
 
     /**
      * @var \yii\di\Container

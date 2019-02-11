@@ -14,13 +14,13 @@ final class Bootstrap implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $app->setModule(ConfigManager::ID, [
-            'class' => ConfigManager::class,
+        $app->setModule(ConfigManagerModule::ID, [
+            'class' => ConfigManagerModule::class,
             'diContainer' => Yii::$container,
             'globalValues' => $app->params,
         ]);
-        /** @var ConfigManager $module */
-        $module = $app->getModule(ConfigManager::ID);
+        /** @var ConfigManagerModule $module */
+        $module = $app->getModule(ConfigManagerModule::ID);
         /** @var ModuleService $moduleService */
         $moduleService = Yii::$container->get(ModuleService::class);
         $moduleService->registerModule($module);

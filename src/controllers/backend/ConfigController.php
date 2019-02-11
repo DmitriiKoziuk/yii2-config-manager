@@ -5,9 +5,9 @@ use Yii;
 use yii\base\Module;
 use yii\web\Controller;
 use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
-use DmitriiKoziuk\yii2ConfigManager\ConfigManager as ConfigModule;
+use DmitriiKoziuk\yii2ConfigManager\ConfigManagerModule;
 
-class ConfigController extends Controller
+final class ConfigController extends Controller
 {
     /** @var ConfigService */
     private $_configService;
@@ -18,7 +18,7 @@ class ConfigController extends Controller
         $this->_configService = $configService;
     }
 
-    public function actionIndex(string $id = ConfigModule::GENERAL_CONFIG_NAME)
+    public function actionIndex(string $id = ConfigManagerModule::GENERAL_CONFIG_NAME)
     {
         if (Yii::$app->request->isPost) {
             $configValues = Yii::$app->request->post($id);
@@ -26,7 +26,6 @@ class ConfigController extends Controller
                 ->updateConfigValues($id, $configValues)
                 ->save($id);
         }
-
         return $this->render('index', [
             'configName' => $id,
             'configService' => $this->_configService,
