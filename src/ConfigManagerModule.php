@@ -18,7 +18,10 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
 
     const GENERAL_CONFIG_NAME = 'general';
 
-    const CONFIG_SAVE_LOCATION = '@common/storage/dk-config-manager/config';
+    const CONFIG_SAVE_LOCATION = '@common' . DIRECTORY_SEPARATOR .
+        'storage' . DIRECTORY_SEPARATOR .
+        'dk-config-manager' . DIRECTORY_SEPARATOR .
+        'config';
 
     /**
      * @var \yii\di\Container
