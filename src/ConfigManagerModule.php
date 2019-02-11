@@ -115,12 +115,12 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
         $configService->registerConfig(new Config(self::GENERAL_CONFIG_NAME, 'Config manager', [
             new ValueString(
                 'frontendDomainName',
-                $this->globalValues['frontendDomainName'] ?? '',
+                $this->globalValues['frontendDomainName'] ?? 'http://default-domain',
                 'Frontend domain name'
             ),
             new ValueString(
                 'backendDomainName',
-                $this->globalValues['backendDomainName'] ?? '',
+                $this->globalValues['backendDomainName'] ?? 'http://b.default-domain',
                 'Backend domain name'
             ),
             new ValueString(
