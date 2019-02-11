@@ -16,7 +16,7 @@ php composer.phar require dmitriikoziuk/yii2-config-manager
 or add
 
 ```
-"dmitriikoziuk/yii2-config-manager": "*"
+"dmitriikoziuk/yii2-config-manager": "^0.1"
 ```
 
 to the require section of your `composer.json` file.
