@@ -7,7 +7,7 @@ use yii\web\Controller;
 use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
 use DmitriiKoziuk\yii2ConfigManager\ConfigManagerModule;
 
-class ConfigController extends Controller
+final class ConfigController extends Controller
 {
     /** @var ConfigService */
     private $_configService;
@@ -26,7 +26,6 @@ class ConfigController extends Controller
                 ->updateConfigValues($id, $configValues)
                 ->save($id);
         }
-
         return $this->render('index', [
             'configName' => $id,
             'configService' => $this->_configService,
