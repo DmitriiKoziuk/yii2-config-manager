@@ -4,6 +4,7 @@ namespace DmitriiKoziuk\yii2ConfigManager;
 use Yii;
 use yii\web\Application as WebApp;
 use yii\base\Application as BaseApp;
+use DmitriiKoziuk\yii2Base\BaseModule;
 use DmitriiKoziuk\yii2Base\helpers\FileHelper;
 use DmitriiKoziuk\yii2ModuleManager\interfaces\ModuleInterface;
 use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
@@ -59,7 +60,7 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
         $this->_initGlobalConfig();
     }
 
-    public function getId(): string
+    public static function getId(): string
     {
         return self::ID;
     }
@@ -67,6 +68,13 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
     public function getBackendMenuItems(): array
     {
         return ['label' => 'Config manager', 'url' => ['/' . self::ID . '/config/index']];
+    }
+
+    public static function requireOtherModulesToBeActive(): array
+    {
+        return [
+            BaseModule::class,
+        ];
     }
 
     private function _initLocalProperties(BaseApp $app)
