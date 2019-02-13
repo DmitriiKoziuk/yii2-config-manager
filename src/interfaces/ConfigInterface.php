@@ -21,6 +21,8 @@ interface ConfigInterface
 
     public function getDefaultValue(string $valueName);
 
+    public function getValue(string $valueName);
+
     /**
      * @return ValueInterface[]
      */

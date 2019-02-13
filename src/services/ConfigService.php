@@ -44,7 +44,7 @@ class ConfigService
      */
     public function getValue(string $configId, string $valueName)
     {
-        return $this->_configs[ $configId ]->getDefaultValue($valueName);
+        return $this->_configs[ $configId ]->getValue($valueName);
     }
 
     public function getConfigList(): array

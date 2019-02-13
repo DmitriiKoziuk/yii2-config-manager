@@ -49,6 +49,11 @@ class Config implements ConfigInterface
         return $this->_values[ $valueName ]->getDefaultValue();
     }
 
+    public function getValue(string $valueName)
+    {
+        return $this->_values[ $valueName ]->getValue();
+    }
+
     /**
      * @return ValueInterface[]
      */
