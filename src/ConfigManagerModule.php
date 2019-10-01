@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 namespace DmitriiKoziuk\yii2ConfigManager;
 
 use Yii;
@@ -38,13 +39,13 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
      * Overwrite this param if you backend app id is different from default.
      * @var string
      */
-    public $backendAppId = 'app-backend';
+    public $backendAppId = YII_ENV_TEST ? 'app-backend-tests' : 'app-backend';
 
     /**
      * Overwrite this param if you backend app id is different from default.
      * @var string
      */
-    public $frontendAppId = 'app-frontend';
+    public $frontendAppId = YII_ENV_TEST ? 'app-frontend-tests' : 'app-frontend';
 
     /**
      * @throws \yii\base\InvalidConfigException
@@ -54,10 +55,10 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
     {
         /** @var BaseApp $app */
         $app = $this->module;
-        $this->_initLocalProperties($app);
-        $this->_registerTranslation($app);
-        $this->_registerClassesToDIContainer();
-        $this->_initGlobalConfig();
+        $this->initLocalProperties($app);
+        $this->registerTranslation($app);
+        $this->registerClassesToDIContainer();
+        $this->initGlobalConfig();
     }
 
     public static function getId(): string
@@ -77,14 +78,14 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
         ];
     }
 
-    private function _initLocalProperties(BaseApp $app)
+    private function initLocalProperties(BaseApp $app)
     {
         if ($app instanceof WebApp && $app->id == $this->backendAppId) {
             $this->controllerNamespace = __NAMESPACE__ . '\controllers\backend';
         }
     }
 
-    private function _registerTranslation(BaseApp $app)
+    private function registerTranslation(BaseApp $app)
     {
         $app->i18n->translations[self::TRANSLATE] = [
             'class'          => 'yii\i18n\PhpMessageSource',
@@ -97,7 +98,7 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\di\NotInstantiableException
      */
-    private function _registerClassesToDIContainer(): void
+    private function registerClassesToDIContainer(): void
     {
         /** @var FileHelper $fileHelper */
         $fileHelper = $this->diContainer->get(FileHelper::class);
@@ -116,7 +117,7 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
      * @throws \yii\base\InvalidConfigException
      * @throws \yii\di\NotInstantiableException
      */
-    private function _initGlobalConfig()
+    private function initGlobalConfig()
     {
         /** @var ConfigService $configService */
         $configService = $this->diContainer->get(ConfigService::class);
