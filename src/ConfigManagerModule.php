@@ -5,7 +5,6 @@ namespace DmitriiKoziuk\yii2ConfigManager;
 use Yii;
 use yii\web\Application as WebApp;
 use yii\base\Application as BaseApp;
-use DmitriiKoziuk\yii2Base\BaseModule;
 use DmitriiKoziuk\yii2Base\helpers\FileHelper;
 use DmitriiKoziuk\yii2ModuleManager\interfaces\ModuleInterface;
 use DmitriiKoziuk\yii2ConfigManager\services\ConfigService;
@@ -73,9 +72,7 @@ final class ConfigManagerModule extends \yii\base\Module implements ModuleInterf
 
     public static function requireOtherModulesToBeActive(): array
     {
-        return [
-            BaseModule::class,
-        ];
+        return [];
     }
 
     private function initLocalProperties(BaseApp $app)
